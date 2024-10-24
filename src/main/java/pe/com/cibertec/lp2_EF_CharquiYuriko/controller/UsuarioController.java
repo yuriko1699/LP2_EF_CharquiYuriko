@@ -46,7 +46,7 @@ private final UsuarioService usuarioService;
 		boolean validarUsuario = usuarioService.validarUsuario(usuarioFormulario);
 		if(validarUsuario) {
 			session.setAttribute("usuario", usuarioFormulario.getCorreo());
-			return "redirect:/menu";
+			return "redirect:/producto/";
 		}
 		model.addAttribute("loginInvalido", "No existe el usuario");
 		model.addAttribute("usuario", new UsuarioEntity());
