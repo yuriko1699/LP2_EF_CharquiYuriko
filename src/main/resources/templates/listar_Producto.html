@@ -25,11 +25,6 @@
 							<th>Categoría</th>
 							<th>Acción</th>
 		                </tr>
-						
-						<td>
-						  <button button type="ver" class="btn btn-secondary btn-sm">Ver</button>
-						  <button button type="editar" class="btn btn-secondary btn-sm">Editar</button>
-					 </td>
 		            </thead>
 		            <tbody>
 		                <tr th:each="producto : ${listaprod}">
@@ -39,6 +34,10 @@
 		                    <td th:text="${producto.cantidad}"></td>
 		                    <td th:text="${producto.fechaVencimiento}"></td>
 		                    <td th:text="${producto.categoriaEntity.nombreCategoria}"></td>
+							<td>
+							<a th:href="@{/producto/editar_producto/{id}(id=${producto.productoId})}" class="btn btn-secondary">Editar</a>
+							 <a th:href="@{/producto/detalle_producto/{id}(id=${producto.productoId})}" class="btn btn-secondary">Ver</a>
+						 </td>
 		                </tr>
 		            </tbody>
 		        </table>

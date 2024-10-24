@@ -6,41 +6,56 @@
     <title>Editar Producto</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
-<body>
-    <div class="container">
-        <div class="row mt-5">
-            <div class="col-md-12">
-                <h2 class="text-center mb-4">Editar Producto</h2>
-				<a th:href="@{/producto/registrar_producto}" class="btn btn-primary">Editar</a>
-                <div class="card">
-                    <div class="card-body">
-                        <form>
-                            <div class="form-group">
-                                <label for="nombre">Nombre:</label>
-                                <input type="text" class="form-control" id="nombre" value="Leche Gloria" readonly>
-                            </div>
-                            <div class="form-group">
-                                <label for="precio">Precio:</label>
-                                <input type="number" class="form-control" id="precio" value="2.50" readonly>
-                            </div>
-                            <div class="form-group">
-                                <label for="stock">Stock:</label>
-                                <input type="number" class="form-control" id="stock" value="10" readonly>
-                            </div>
-                            <div class="form-group">
-                                <label for="categoria">Categoría:</label>
-                                <select class="form-control" id="categoria" readonly>
-                                    <option value="LACTEOS" selected>LACTEOS</option>
-                                </select>
-                            </div>
-                            <div class="d-flex justify-content-between">
-                                <button type="button" class="btn btn-secondary">Atrás</button>
-                                <button type="submit" class="btn btn-primary">Editar Producto</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row mt-5">
-            <div class="col-md-12">
+<body
+	style="background-color: gray; display: flex; justify-content: center; align-items: center; flex-direction: column;">
+
+	<div
+		style="width: 90vw; display: flex; justify-content: space-around; margin: 0 auto; margin-top: 15px; color: white;">
+		<h3>
+			Bienvenido: <span th:text="${usuario}"></span>
+		</h3>
+		<a class="btn btn-secondary" th:href="@{/logout}"
+			role="button">Cerrar sesión</a>
+	</div>
+
+	<div
+		style="width: 30vw; height: 50vh; background-color: white; margin-top: 5%; padding: 10px">
+		<h2>Editar Usuario</h2>
+		<div th:if="${errorMessage}" class="alert alert-danger" role="alert">
+			<span th:text="${errorMessage}"></span>
+		</div>
+		<form
+			th:action="@{'/producto/editar_producto/' + ${producto.productoId != null ? producto.productoId : id}}"
+			th:object="${producto}" method="post">
+			<div class="form-group">
+				<label for="nombreProducto">Nombre Producto:</label> <input
+					type="text" class="form-control" id="nombreProducto"
+					th:field="*{nombreProducto}">
+			</div>
+			<div class="form-group">
+				<label for="precio">Precio:</label> <input type="number"
+					class="form-control" id="precio" th:field="*{precio}">
+			</div>
+			<div class="form-group">
+				<label for="stockProducto">Stock Producto:</label> <input
+					type="number" class="form-control" id="stockProducto"
+					th:field="*{stockProducto}">
+			</div>
+
+			<div class="form-group mb-4">
+				<label for="categoriaEntity">Categoría</label> <select
+					th:field="*{categoriaEntity}" class="form-control"
+					id="categoriaEntity" required>
+					<option th:each="categoria : ${categorias}"
+						th:value="${categoria.categoriaId}"
+						th:text="${categoria.nombreCategoria}"></option>
+				</select>
+			</div>
+
+			<a th:href="@{/producto/}" class="btn btn-secondary">Cancelar</a>
+			<button type="submit" class="btn btn-secondary">Guardar
+				cambios</button>
+		</form>
+	</div>
+</body>
+</html>
