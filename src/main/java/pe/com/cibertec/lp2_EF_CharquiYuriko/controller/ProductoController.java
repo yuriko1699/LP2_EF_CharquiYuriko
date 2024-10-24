@@ -81,7 +81,7 @@ public class ProductoController {
 	public String actualizarProducto(@RequestParam("productoId") int productoId, Model model) {
 		model.addAttribute("categorias", categoriaService.listarCategoria());
 		model.addAttribute("producto", productoService.buscarProductoPorId(productoId));
-		return "registrar_producto";
+		return "editar_producto";
 		
 	}
 }
